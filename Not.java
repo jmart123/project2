@@ -1,0 +1,16 @@
+public class Not implements Instruction
+{
+    public void run(vmStack vms){
+        int a;
+        int logicalNot;
+
+        //get value from stack
+        a = vms.pop();
+
+        //logically not value from stack
+        logicalNot = ~a;
+
+        //push the logicalNot to the stack
+        vms.push(logicalNot);
+    }
+}
