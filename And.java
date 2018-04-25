@@ -1,6 +1,6 @@
 public class And implements instruction
 {
-    public void run(vmStack vms){
+    public void run(vmStack vms, int programCounter){
         int a;
         int b;
         int logicalAnd;

@@ -4,7 +4,7 @@ public class Mul implements Instruction
 	  int b;
 	  int prod;
 
-	  public void run(vmStack vms){
+	  public void run(vmStack vms, int programCounter){
 		    //retrieve values from stack
 		    a = vms.pop();
 		    b = vms.pop();

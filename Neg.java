@@ -1,6 +1,6 @@
 public class Neg implements Instruction
 {
-    public void run(vmStack vms){
+    public void run(vmStack vms, int programCounter){
         int a;
 
         //get value
