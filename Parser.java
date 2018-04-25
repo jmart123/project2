@@ -49,8 +49,15 @@ public class Parser {
 	// read data from file into raw
 	public void read() {
 
-		if (input.readInt() != 0xefdeebfe) {
-			System.out.println("magic header missing...FEEDBEEF");
+		try {
+			if (input.readInt() != 0xfeedbeef) {
+				System.out.println("magic header missing...FEEDBEEF");
+				System.exit(-1);
+			}
+		}
+
+		catch (IOException e) {
+			System.out.println("No data to read from file");
 			System.exit(-1);
 		}
 
@@ -74,7 +81,11 @@ public class Parser {
 
 		for (int i = 0; i < size; i++) {
 			instruction = raw.get(i);
-			opcode = instruction 
+			opcode = instruction >> 28;
+
+			switch (opcode) {
+
+			}
 		}
 	}
 }	
