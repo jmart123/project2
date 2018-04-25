@@ -1,8 +1,8 @@
 public class Pop implements Instruction
 {
-		public void run(vmStack vms){
+		public void run(vmStack vms, int programCounter){
 				int notUsed;
 
-				notUsed = vms.pop(); //just pops the value?
+				notUsed = vms.pop(); //just pops the value. value goes unused.
 		}	
 }

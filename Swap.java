@@ -1,6 +1,6 @@
 public class Swap implements Instruction
 {
-		public void run(vmStack vms){
+		public void run(vmStack vms, int programCounter){
 				//case with empty stack
 
 			 	if(vms.getStackPointer == -1) return;
@@ -13,9 +13,11 @@ public class Swap implements Instruction
 				int a;
 				int b;
 
+        //pop values
 				a = vms.pop();
 				b = vms.pop();
 
+        //push in opposite order
 				vms.push(a);
 				vms.push(b);
 		}
