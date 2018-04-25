@@ -34,7 +34,7 @@ public class vmStack {
 		if (sp < 1024 && sp >= 0) {
 			return stack[idx];
 		} else {
-			System.out.println("fatal error: tried to pop empty stack.");
+			System.out.println("fatal error: tried to peek outside of stack bounds.");
 			System.exit(-1);
 		}	
 
