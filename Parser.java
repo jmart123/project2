@@ -11,6 +11,7 @@ public class Parser {
 
 	public Parser() {
 		instr = new ArrayList<Instruction> ();
+		size  = 0;
 	}
 
 	public Parser(String filename) {
@@ -39,6 +40,11 @@ public class Parser {
 		}
 	}
 
+	public void add(Instruction i) {
+		instr.add(i);
+		size++;
+	}
+
 	// read data from file into raw
 	public void read() {
 
@@ -56,6 +62,6 @@ public class Parser {
 
 	// parse raw data into instruction list
 	public void parse() {
-	
+			
 	}
 }	
