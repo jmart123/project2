@@ -7,6 +7,6 @@ public class Exit implements Instruction
 		}
 
 		public void run(vmStack vms, int pc){
-			System.Exit(parameter);
+			System.exit(parameter);
 		}
 }

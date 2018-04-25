@@ -11,17 +11,27 @@ public class vmStack {
 	}
 
 	public void push(int val) {
-		if (sp < 1024) 
+		if (sp < 1024) {
 			stack[sp++] = val;
-		else		   
-			throw new Exception("Pushed beyond stack capacity");
+		} else {		   
+			System.out.println("fatal error: tried to push onto full stack.");
+			System.exit(-1);
+		}
 	}
 
 	public int pop() {
-		if (sp >= 0) 
-			return stack[sp--];
-		else
-			throw new Exception("Tried to pop from an empty stack");
+		if (sp >= 0) {
+			 return stack[sp--];
+		} else {
+			System.out.println("fatal error: tried to pop empty stack.");
+			System.exit(-1);
+		}
+
+		return 420; // to make the compiler shut up
+	}
+
+	public int size() {
+		return sp;
 	}
 
 	public int getStackPointer() {
