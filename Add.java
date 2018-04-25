@@ -1,6 +1,6 @@
-public class Add Implements Instruction
+public class Add implements Instruction
 {
-		public void run(vmStack vms){
+		public void run(vmStack vms, int pc){
 				int a;
 				int b;
 				int sum;
