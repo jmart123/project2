@@ -18,8 +18,8 @@ public class Parser {
 		
 		try {
 			size  = toIntExact((new File(filename)).length() / 4) - 1;
-			instr = new ArrayList<Instruction> (size / 4) - 1;
-			raw	  = new ArrayList<Integer> (size / 4) - 1;
+			instr = new ArrayList<Instruction> ((size / 4) - 1);
+			raw	  = new ArrayList<Integer> ((size / 4) - 1);
 			
 			try {
 				input = new DataInputStream(new FileInputStream(filename));
@@ -51,7 +51,7 @@ public class Parser {
 
 		if (input.readInt() != 0xefdeebfe) {
 			System.out.println("magic header missing...FEEDBEEF");
-			System.exit();
+			System.exit(-1);
 		}
 
 		for (int i = 0; i < size / 4; i++) {
@@ -68,6 +68,13 @@ public class Parser {
 
 	// parse raw data into instruction list
 	public void parse() {
-			
+		
+		int instruction;
+		int opcode;
+
+		for (int i = 0; i < size; i++) {
+			instruction = raw.get(i);
+			opcode = instruction 
+		}
 	}
 }	
