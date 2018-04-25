@@ -11,8 +11,8 @@ public class vmStack {
 	}
 
 	public void push(int val) {
-		if (sp < 1024) {
-			stack[sp++] = val;
+		if (sp < 1023) {
+			stack[++sp] = val;
 		} else {		   
 			System.out.println("fatal error: tried to push onto full stack.");
 			System.exit(-1);
@@ -28,10 +28,6 @@ public class vmStack {
 		}
 
 		return 420; // to make the compiler shut up
-	}
-
-	public int size() {
-		return sp;
 	}
 
 	public int getStackPointer() {
