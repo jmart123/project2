@@ -17,9 +17,9 @@ public class Parser {
 	public Parser(String filename) {
 		
 		try {
-			size  = toIntExact((new File(filename)).length() / 4);
-			instr = new ArrayList<Instruction> (size / 4);
-			raw	  = new ArrayList<Integer> (size / 4);
+			size  = toIntExact((new File(filename)).length() / 4) - 1;
+			instr = new ArrayList<Instruction> (size / 4) - 1;
+			raw	  = new ArrayList<Integer> (size / 4) - 1;
 			
 			try {
 				input = new DataInputStream(new FileInputStream(filename));
@@ -48,6 +48,11 @@ public class Parser {
 
 	// read data from file into raw
 	public void read() {
+
+		if (input.readInt() != 0xefdeebfe) {
+			System.out.println("magic header missing...FEEDBEEF");
+			System.exit();
+		}
 
 		for (int i = 0; i < size / 4; i++) {
 			
