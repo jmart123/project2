@@ -30,6 +30,17 @@ public class vmStack {
 		return 420; // to make the compiler shut up
 	}
 
+	public int peek(int idx) {
+		if (sp < 1024 && sp >= 0) {
+			return stack[idx];
+		} else {
+			System.out.println("fatal error: tried to pop empty stack.");
+			System.exit(-1);
+		}	
+
+		return 420; // blaze it
+	}
+
 	public int getStackPointer() {
 		return sp;
 	}
