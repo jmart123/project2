@@ -4,9 +4,10 @@ import static java.lang.Math.toIntExact;
 
 public class Parser {
 	
-	private List<Instruction> instr;
-	private List<Integer>	  raw;
-	private DataInputStream	  input;
+	private List<Instruction> instr; // callable instruction list (final result)
+	private List<Integer>	  raw;	 // raw integer bytecode
+	private DataInputStream	  input; // binary input stream
+	private int				  size;  // equals filesize/4 (NUM_INSTRUCTIONS)
 
 	public Parser() {
 		instr = new ArrayList<Instruction> ();
@@ -15,8 +16,9 @@ public class Parser {
 	public Parser(String filename) {
 		
 		try {
-			int filesize = toIntExact((new File(filename)).length() / 4);
-			instr = new ArrayList<Instruction> (filesize);
+			size  = toIntExact((new File(filename)).length() / 4);
+			instr = new ArrayList<Instruction> (size / 4);
+			raw	  = new ArrayList<Integer> (size / 4);
 			
 			try {
 				input = new DataInputStream(new FileInputStream(filename));
@@ -24,6 +26,7 @@ public class Parser {
 
 			catch (FileNotFoundException e) {
 				System.out.println(filename + ": file not found");
+				System.exit(-1);
 			}
 			
 			read();
@@ -31,15 +34,28 @@ public class Parser {
 		} 
 		
 		catch (ArithmeticException e) {
-			System.out.println("file was too large");
+			System.out.println(filename + ": file was too large");
+			System.exit(-1);
 		}
 	}
 
+	// read data from file into raw
 	public void read() {
-		// read data from file into raw
+
+		for (int i = 0; i < size / 4; i++) {
+			
+			try {
+				raw.add(input.readInt());
+			}
+
+			catch (IOException e) {
+				System.out.println("File reader encountered unexpected EOF");
+			}
+		}
 	}
 
+	// parse raw data into instruction list
 	public void parse() {
-		// parse raw data into instruction list
+	
 	}
 }	
