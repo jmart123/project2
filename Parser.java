@@ -40,6 +40,7 @@ public class Parser {
 		}
 	}
 
+	// method to manually add instruction to program list
 	public void add(Instruction i) {
 		instr.add(i);
 		size++;
