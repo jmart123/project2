@@ -77,14 +77,77 @@ public class Parser {
 	public void parse() {
 		
 		int instruction;
+		int parameter;
 		int opcode;
 
 		for (int i = 0; i < size; i++) {
+
 			instruction = raw.get(i);
 			opcode = instruction >> 28;
 
 			switch (opcode) {
+				
+				case 8:
 
+				parameter = (instruction << 8) >> 8;
+
+				switch((instruction >> 24) & 0xf) {
+					
+					case 0:
+					instr.set(i, new Ifeq(parameter));
+					
+					case 1:
+					instr.set(i, new Ifne(parameter));
+					
+					case 2:
+					instr.set(i, new Iflt(parameter));
+					
+					case 3:
+					instr.set(i, new Ifgt(parameter));
+					
+					case 4:
+					instr.set(i, new Ifle(parameter));
+					
+					case 5:
+					instr.set(i, new Ifge(parameter));
+				}
+				
+				case 9:
+
+				parameter = (instruction << 8) >> 8;
+
+				switch((instruction >> 24) & 0xf) {
+					
+					case 0:
+					instr.set(i, new Ifez(parameter));
+
+					case 1:
+					instr.set(i, new Ifnz(parameter));
+
+					case 2:
+					instr.set(i, new Ifmi(parameter));
+
+					case 3:
+					instr.set(i, new Ifpl(parameter));
+				}
+
+				case 12:
+				
+				parameter = (instruction << 4) >> 4;
+				instr.set(i, new Dup(parameter));
+
+				case 13:
+				
+				instr.set(i, new Print());
+
+				case 14:
+				
+				instr.set(i, new Dump());
+
+				case 15:
+				
+				parameter = (instruction << 4) >> 4;
+				instr.set(i, new Push(parameter));
 			}
 		}
 	}
