@@ -41,14 +41,17 @@ public class Parser {
 		}
 	}
 
+  //returns instruction list
 	public List<Instruction> getInstructions() {
 		return instr;
 	}
 
+  //returns raw value of instruction
 	public List<Integer> getRaw() {
 		return raw;
 	}
 
+  //returns number of instructions
 	public int getSize() {
 		return size - 1;
 	}
@@ -62,6 +65,7 @@ public class Parser {
 	// read data from file into raw
 	public void read() {
 
+    //check for magic header  
 		try {
 			if (input.readInt() != 0xfeedbeef) {
 				System.out.println("magic header missing...0xFEEDBEEF");
@@ -74,8 +78,10 @@ public class Parser {
 			System.exit(-1);
 		}
 
+    //read through the input file and create appropriate instructions
 		for (int i = 0; i < size - 1; i++) {
 			
+			//read instruction  
 			try {
 				raw.add(Integer.reverseBytes(input.readInt()));
 			}
@@ -94,11 +100,13 @@ public class Parser {
 		int opcode;
 		int subcode;
 
+    //iterate through raw list and create instructions
 		for (int i = 0; i < size - 1; i++) {
 
 			instruction = raw.get(i);
 			opcode = instruction >>> 28;
 
+      //switch on the opcode, which is the final 4 bits of the raw value
 			switch (opcode) {
 
 				case 0: // Exit, Swap, Inpt, Nop
@@ -109,18 +117,14 @@ public class Parser {
 					case 0: // Exit
 					parameter = instruction & 0xff;
 					instr.add(new Exit(parameter));
-//					System.out.print("Exit");
-//					System.out.println(parameter);
 					break;
 					
 					case 1: // Swap
 					instr.add(new Swap());
-//					System.out.println("Swap");
 					break;
 					
 					case 2: // Inpt
 					instr.add(new Inpt());
-//					System.out.println("Inpt");
 					break;
 					
 					case 3: // Nop
@@ -131,7 +135,6 @@ public class Parser {
 				break;
 				
 				case 1: // Pop
-//				System.out.println("adding Pop, instruction " + i);
 				instr.add(new Pop());
 				break;
 				
@@ -196,82 +199,85 @@ public class Parser {
 				instr.add(new Goto(parameter));
 				break;
 
+        //check to create conditionals
 				case 8:
 				parameter = (instruction << 8) >>> 8;
 				subcode = (instruction >>> 24) & 0xf;
 
 				switch(subcode) {
 					
-					case 0:
+					case 0: //Ifeq
 					instr.add(new Ifeq(parameter));
 					break;
 
-					case 1:
+					case 1: //Ifne
 					instr.add(new Ifne(parameter));
 					break;
 
-					case 2:
+					case 2: //Iflt
 					instr.add(new Iflt(parameter));
 					break;
 
-					case 3:
+					case 3: //Ifgt
 					instr.add(new Ifgt(parameter));
 					break;
 
-					case 4:
+					case 4: //Ifle
 					instr.add(new Ifle(parameter));
 					break;
 
-					case 5:
+					case 5: //Ifge
 					instr.add(new Ifge(parameter));
 					break;
 				}
 
 				break;
 				
+				//now check unary conditionals
 				case 9:
 				parameter = (instruction << 8) >>> 8;
 				subcode = (instruction >>> 24) & 0xf;
 
 				switch(subcode) {
 					
-					case 0:
+					case 0: //Ifez
 					instr.add(new Ifez(parameter));
 					break;
 
-					case 1:
+					case 1: //Ifnz
 					instr.add(new Ifnz(parameter));
 					break;
 
-					case 2:
+					case 2: //Ifmi
 					instr.add(new Ifmi(parameter));
 					break;
 
-					case 3:
+					case 3: //Ifpl
 					instr.add(new Ifpl(parameter));
 					break;
 				}
 
 				break;
 
-				case 12:
+				case 12: //Dup
 				parameter = (instruction << 4) >>> 4;
 				instr.add(new Dup(parameter));
 				break;
 
-				case 13:
+				case 13: //Print
 				instr.add(new Print());
 				break;
 
-				case 14:
+				case 14: //Dump
 				instr.add(new Dump());
 				break;
 
-				case 15:
+				case 15: //Push
 				parameter = (instruction << 4) >> 4;
 				instr.add(new Push(parameter));
 				break;
 
+        //default case. does not create instruction that is not recognized.
 				default:
 				System.out.println("unknown instruction " + opcode);
 				break;
