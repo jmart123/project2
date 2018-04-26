@@ -1,6 +1,6 @@
 public interface Instruction
 {
-		public void run(vmStack vms, int programCounter);
+		public int run(vmStack vms, int programCounter);
 }
 
 

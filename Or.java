@@ -1,6 +1,6 @@
 public class Or implements Instruction
 {
-    public void run(vmStack vms, int programCounter){
+    public int run(vmStack vms, int programCounter){
         int a;
         int b;
         int logicalOr;
@@ -14,5 +14,7 @@ public class Or implements Instruction
 
         //push the logical or to the stack
         vms.push(logicalOr);
+
+		return programCounter;
     }
 }

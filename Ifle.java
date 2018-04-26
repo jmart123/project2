@@ -7,7 +7,7 @@ public class Ifle implements Instruction
         parameter = param;
     }
 
-    public void run(vmStack vms, int programCounter){
+    public int run(vmStack vms, int programCounter){
         int a;
         int b;
 
@@ -16,10 +16,12 @@ public class Ifle implements Instruction
         b = vms.peek(vms.getStackPointer() - 1);
 
         //check conditional 
-        if(a <= b){
-            programCounter += (parameter/4);
-            setNC(programCounter);
-        }
+        if (a <= b){
+            return programCounter + (parameter / 4) - 1;
+//            setNC(programCounter);
+        } else {
+			return programCounter;
+		}
     }
 
     //set updated program counter

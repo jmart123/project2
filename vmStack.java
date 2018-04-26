@@ -42,9 +42,14 @@ public class vmStack {
 	}
 	
 	public void dump() {
+		
+		System.out.println("Stack dump:");
+
 		for (int i = sp; i >= 0; i--) {
 			System.out.println(stack[i]);
 		}
+
+		System.out.println();
 	}
 
 	public int getStackPointer() {

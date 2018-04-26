@@ -1,6 +1,6 @@
 public class Rem implements Instruction
 {
-        public void run(vmStack vms, int programCounter){
+        public int run(vmStack vms, int programCounter){
             int a;
             int b;
             int rem;
@@ -14,5 +14,7 @@ public class Rem implements Instruction
 
             //push remainder to the stack
             vms.push(rem);
+
+			return programCounter;
         }
 }

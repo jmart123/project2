@@ -1,6 +1,6 @@
 public class Add implements Instruction
 {
-	public void run(vmStack vms, int programCounter){
+	public int run(vmStack vms, int programCounter){
 			int a;
 			int b;
 			int sum;
@@ -14,5 +14,7 @@ public class Add implements Instruction
 
 			//push sum on stack
 			vms.push(sum);
+	
+			return programCounter;
 	}
 }

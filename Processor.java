@@ -12,7 +12,7 @@ class Processor {
 
 		for (int i = 0; i < instr.size(); i++) {
 
-			// Special case for Goto instructions - Updates PC
+/*			// Special case for Goto instructions - Updates PC
 			if(instr.get(i) instanceof Goto) {
 				instr.get(i).run(vms, i);
 				i = ((Goto)instr.get(i)).getNC() - 1; 
@@ -49,7 +49,8 @@ class Processor {
 			} else { // Normal case for instructions - run the instr
 				instr.get(i).run(vms, i);
 			}
-
+*/
+			i = instr.get(i).run(vms, i);
 		}
 	}
 }

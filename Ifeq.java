@@ -7,7 +7,7 @@ public class Ifeq implements Instruction
         parameter = param;
     }
 
-    public void run(vmStack vms, int programCounter){
+    public int run(vmStack vms, int programCounter){
         int a;
         int b;
 
@@ -16,10 +16,12 @@ public class Ifeq implements Instruction
         b = vms.peek(vms.getStackPointer() - 1);
 
         //check conditional
-        if(a == b){
-            programCounter += (parameter/4); //add the PC + PC relative offset
-            setNC(programCounter);
-        }
+        if (a == b) {
+            return programCounter + (parameter / 4) - 1; //add the PC + PC relative offset
+//            setNC(programCounter);
+        } else {
+			return programCounter;
+		}
     }
 
     public void setNC(int pc){

@@ -6,7 +6,8 @@ public class Exit implements Instruction
 				parameter = param;
 		}
 
-		public void run(vmStack vms, int pc){
+		public int run(vmStack vms, int pc){
 			System.exit(parameter);
+			return pc;
 		}
 }

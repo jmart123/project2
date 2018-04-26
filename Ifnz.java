@@ -7,17 +7,19 @@ public class Ifnz implements Instruction
         parameter = param;
     }
 
-    public void run(vmStack vms, int programCounter){
+    public int run(vmStack vms, int programCounter){
         int a;
 
         //peek value from stack, do not POP
         a = vms.peek(vms.getStackPointer());
 
         //check conditional
-        if(a != 0){
-            programCounter += (parameter/4);
-            setNC(programCounter);
-        }
+        if (a != 0){
+            return programCounter + (parameter / 4) - 1;
+//            setNC(programCounter);
+        } else {
+			return programCounter;
+		}
     }
 
     public void setNC(int pc){

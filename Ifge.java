@@ -7,7 +7,7 @@ public class Ifge implements Instruction
         parameter = param;
     }
 
-    public void run(vmStack vms, int programCounter){
+    public int run(vmStack vms, int programCounter){
         int a;
         int b;
 
@@ -17,9 +17,11 @@ public class Ifge implements Instruction
 
         //check conditional
         if(a >= b){
-            programCounter += (parameter/4); //program counter is also incremented in the processor
-            setNC(programCounter);
-        }
+            return programCounter + (parameter / 4) - 1; //program counter is also incremented in the processor
+//            setNC(programCounter);
+        } else {
+			return programCounter;
+		}
     }
 
     //set new program counter

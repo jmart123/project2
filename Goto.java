@@ -8,11 +8,11 @@ public class Goto implements Instruction
 		parameter = param;
 	}
 
-	public void run(vmStack vms, int programCounter){
-		// Increment program counter by PC+parameter(PC relative offset)
+	public int run(vmStack vms, int programCounter){
 
-		programCounter += (parameter/4);
-		setNC(programCounter);
+		// Increment program counter by PC+parameter(PC relative offset)
+		return programCounter + (parameter / 4) - 1;
+		
 	}
 
 	// Goto setter

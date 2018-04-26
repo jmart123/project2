@@ -1,6 +1,6 @@
 public class Not implements Instruction
 {
-    public void run(vmStack vms, int programCounter){
+    public int run(vmStack vms, int programCounter){
         int a;
         int logicalNot;
 
@@ -12,5 +12,7 @@ public class Not implements Instruction
 
         //push the logicalNot to the stack
         vms.push(logicalNot);
+		
+		return programCounter;
     }
 }

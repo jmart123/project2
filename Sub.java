@@ -1,6 +1,6 @@
 public class Sub implements Instruction
 {
-		public void run(vmStack vms, int programCounter){
+		public int run(vmStack vms, int programCounter){
 				int a;
 				int b;
 				int diff;
@@ -14,5 +14,7 @@ public class Sub implements Instruction
 
 				//push difference
 				vms.push(diff);
+
+				return programCounter;
 		}
 }

@@ -1,6 +1,6 @@
 public class Div implements Instruction
 {
-    public void run(vmStack vms, int programCounter){
+    public int run(vmStack vms, int programCounter){
         int a;
         int b;
         int q; //quotient
@@ -14,5 +14,7 @@ public class Div implements Instruction
 
         //push quotient to the stack
         vms.push(q);
+
+		return programCounter;
     }
 }

@@ -1,6 +1,6 @@
 public class Xor implements Instruction
 {
-    public void run(vmStack vms, int programCounter){
+    public int run(vmStack vms, int programCounter){
         int a;
         int b;
         int xor;
@@ -14,5 +14,7 @@ public class Xor implements Instruction
 
         //push the value of xor to the stack
         vms.push(xor);
+
+		return programCounter;
     }
 }

@@ -7,7 +7,7 @@ public class Ifgt implements Instruction
         parameter = param;
     }
 
-    public void run(vmStack vms, int programCounter){
+    public int run(vmStack vms, int programCounter){
         int a;
         int b;
 
@@ -16,10 +16,12 @@ public class Ifgt implements Instruction
         b = vms.peek(vms.getStackPointer() - 1);
 
         //check conditional for greater than
-        if(a > b){
-            programCounter += (parameter/4); //the program counter is also incremented in the processor
-            setNC(programCounter);
-        }
+        if (a > b){
+            return programCounter + (parameter / 4) - 1; //the program counter is also incremented in the processor
+//            setNC(programCounter);
+        } else {
+			return programCounter;
+		}
     }
 
     //set new program counter
