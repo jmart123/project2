@@ -269,7 +269,6 @@ public class Parser {
 
 				case 15:
 				parameter = (instruction << 4) >> 4;
-				System.out.println("param: " + parameter);
 				instr.add(new Push(parameter));
 				break;
 

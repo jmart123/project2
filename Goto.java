@@ -12,7 +12,7 @@ public class Goto implements Instruction
         //vms.programCounter += parameter;
         //need to increment program counter by PC+parameter(PC relative offset)
         
-        programCounter += parameter;
+        programCounter += (parameter/4);
         setNC(programCounter);
     }
 
