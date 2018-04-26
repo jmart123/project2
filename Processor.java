@@ -16,34 +16,34 @@ class Processor {
 			if(instr.get(i) instanceof Goto) {
 				instr.get(i).run(vms, i);
 				i = ((Goto)instr.get(i)).getNC() - 1; 
-			} else if(instr.get(i) instance of Ifeq) {
+			} else if(instr.get(i) instanceof Ifeq) {
 				instr.get(i).run(vms, i);
 				i = ((Ifeq)instr.get(i)).getNC() - 1; 	
-			} else if(instr.get(i) instance of Ifne) {
+			} else if(instr.get(i) instanceof Ifne) {
 				instr.get(i).run(vms, i);
 				i = ((Ifne)instr.get(i)).getNC() - 1; 	
-			} else if(instr.get(i) instance of Iflt) {
+			} else if(instr.get(i) instanceof Iflt) {
 				instr.get(i).run(vms, i);
 				i = ((Iflt)instr.get(i)).getNC() - 1; 	
-			} else if(instr.get(i) instance of Ifgt) {
+			} else if(instr.get(i) instanceof Ifgt) {
 				instr.get(i).run(vms, i);
 				i = ((Ifgt)instr.get(i)).getNC() - 1; 	
-			} else if(instr.get(i) instance of Ifle) {
+			} else if(instr.get(i) instanceof Ifle) {
 				instr.get(i).run(vms, i);
 				i = ((Ifle)instr.get(i)).getNC() - 1; 	
-			} else if(instr.get(i) instance of Ifge) {
+			} else if(instr.get(i) instanceof Ifge) {
 				instr.get(i).run(vms, i);
 				i = ((Ifge)instr.get(i)).getNC() - 1; 	
-			} else if(instr.get(i) instance of Ifez) {
+			} else if(instr.get(i) instanceof Ifez) {
 				instr.get(i).run(vms, i);
 				i = ((Ifez)instr.get(i)).getNC() - 1; 	
-			} else if(instr.get(i) instance of Ifnz) {
+			} else if(instr.get(i) instanceof Ifnz) {
 				instr.get(i).run(vms, i);
 				i = ((Ifnz)instr.get(i)).getNC() - 1; 	
-			} else if(instr.get(i) instance of Ifmi) {
+			} else if(instr.get(i) instanceof Ifmi) {
 				instr.get(i).run(vms, i);
 				i = ((Ifmi)instr.get(i)).getNC() - 1; 	
-			} else if(instr.get(i) instance of Ifpl) {
+			} else if(instr.get(i) instanceof Ifpl) {
 				instr.get(i).run(vms, i);
 				i = ((Ifpl)instr.get(i)).getNC() - 1; 	
 			} else { // Normal case for instructions - run the instr
