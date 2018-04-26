@@ -16,17 +16,8 @@ public class Ifpl implements Instruction
         //check conditional
         if (a >= 0){
             return programCounter + (parameter / 4) - 1;
-//            setNC(programCounter);
         } else {
 			return programCounter;
 		}
-    }
-
-    public void setNC(int pc){
-        newCounter = pc;
-    }
-
-    public int getNC(){
-        return newCounter;
     }
 }

@@ -279,7 +279,8 @@ public class Parser {
 
         //default case. does not create instruction that is not recognized.
 				default:
-				System.out.println("unknown instruction " + opcode);
+                System.out.println("fatal error: unknown instruction " + opcode);
+                System.exit(-1);
 				break;
 			}
 		}

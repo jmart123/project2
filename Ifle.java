@@ -1,7 +1,6 @@
 public class Ifle implements Instruction
 {
     private int parameter; //represents PC relative offset
-    private int newCounter; //updated program counter
 
     Ifle(int param){
         parameter = param;
@@ -18,19 +17,8 @@ public class Ifle implements Instruction
         //check conditional 
         if (a <= b){
             return programCounter + (parameter / 4) - 1;
-//            setNC(programCounter);
         } else {
 			return programCounter;
 		}
-    }
-
-    //set updated program counter
-    public void setNC(int pc){
-        newCounter = pc;
-    }
-
-    //get updated program counter
-    public int getNC(){
-        return newCounter;
     }
 }

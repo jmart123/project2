@@ -1,20 +1,20 @@
 public class Add implements Instruction
 {
 	public int run(vmStack vms, int programCounter){
-			int a;
-			int b;
-			int sum;
+		int a;
+		int b;
+		int sum;
 
-      //get values from stack
-			a = vms.pop();
-			b = vms.pop();
+        //get values from stack
+		a = vms.pop();
+        b = vms.pop();
 
-      //add values
-			sum = a + b;
+        //add values
+        sum = a + b;
 
-			//push sum on stack
-			vms.push(sum);
+		//push sum on stack
+		vms.push(sum);
 	
-			return programCounter;
+		return programCounter;
 	}
 }
