@@ -21,7 +21,7 @@ public class Parser {
 			instr = new ArrayList<Instruction> ();
 			raw	  = new ArrayList<Integer> ();
 			
-			System.out.println(size);
+			System.out.println("filesize: " + size);
 
 			try {
 				input = new DataInputStream(new FileInputStream(filename));
@@ -42,6 +42,10 @@ public class Parser {
 		}
 	}
 
+	public List<Instruction> getInstructions() {
+		return instr;
+	}
+
 	// method to manually add instruction to program list
 	public void add(Instruction i) {
 		instr.add(i);
@@ -53,7 +57,7 @@ public class Parser {
 
 		try {
 			if (input.readInt() != 0xfeedbeef) {
-				System.out.println("magic header missing...FEEDBEEF");
+				System.out.println("magic header missing...0xFEEDBEEF");
 				System.exit(-1);
 			}
 		}
@@ -83,7 +87,7 @@ public class Parser {
 		int opcode;
 		int subcode;
 
-		for (int i = 0; i < size; i++) {
+		for (int i = 0; i < size - 1; i++) {
 
 			instruction = raw.get(i);
 			opcode = instruction >> 28;
