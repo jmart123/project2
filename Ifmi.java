@@ -1,6 +1,7 @@
 public class Ifmi implements Instruction
 {
     private int parameter; //represents PC relative offset
+    private int newCounter; //program counter IF the conditional is met
 
     Ifmi(int param){
         parameter = param;
@@ -14,7 +15,18 @@ public class Ifmi implements Instruction
 
         //check conditional
         if(a < 0){
-            programCounter += (parameter - 1);
+            programCounter += (parameter/4);
+            setNC(programCounter);
         }
     }
-}
+
+    //set new program counter
+    public void setNC(int pc){
+        newCounter = pc;
+    }
+
+    //returns updated program counter
+    public int getNC(){
+        return newCounter;
+    }
+}   

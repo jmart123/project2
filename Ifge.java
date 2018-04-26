@@ -1,6 +1,7 @@
 public class Ifge implements Instruction
 {
     private int parameter; //represents relative offset
+    private int newCounter; //updated program counter
 
     Ifge(int param){
         parameter = param;
@@ -16,7 +17,18 @@ public class Ifge implements Instruction
 
         //check conditional
         if(a >= b){
-            programCounter += (parameter - 1); //program counter is also incremented in the processor
+            programCounter += (parameter/4); //program counter is also incremented in the processor
+            setNC(programCounter);
         }
+    }
+
+    //set new program counter
+    public void setNC(int pc){
+        newCounter = pc;
+    }
+
+    //get updated program counter
+    public int getNC(){
+        return newCounter;
     }
 }

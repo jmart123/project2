@@ -1,6 +1,7 @@
 public class Ifeq implements Instruction
 {
     private int parameter; //this parameter represents the PC relative offset
+    private int newCounter; //updated program counter from conditional
 
     Ifeq(int param){
         parameter = param;
@@ -16,7 +17,16 @@ public class Ifeq implements Instruction
 
         //check conditional
         if(a == b){
-            programCounter += (parameter - 1); //add the PC + PC relative offset
+            programCounter += (parameter/4); //add the PC + PC relative offset
+            setNC(programCounter);
         }
+    }
+
+    public void setNC(int pc){
+        newCounter = pc;
+    }
+
+    public int getNC(){
+        return newCounter;
     }
 }

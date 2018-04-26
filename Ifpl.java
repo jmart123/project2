@@ -1,6 +1,7 @@
 public class Ifpl implements Instruction
 {
     private int parameter; //represents PC relative offset
+    private int newCounter;
 
     Ifpl(int param){
         parameter = param;
@@ -13,8 +14,17 @@ public class Ifpl implements Instruction
         a = vms.peek(vms.getStackPointer());
 
         //check conditional
-        if(a > 0){
-            programCounter += (parameter - 1);
+        if(a >= 0){
+            programCounter += (parameter/4);
+            setNC(programCounter);
         }
+    }
+
+    public void setNC(int pc){
+        newCounter = pc;
+    }
+
+    public int getNC(){
+        return newCounter;
     }
 }
