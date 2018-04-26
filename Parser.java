@@ -174,7 +174,8 @@ public class Parser {
 				break;
 				
 				case 7: // Goto
-				instr.set(i, new Goto((Instruction << 4) >> 4));
+				parameter = (instruction << 4) >> 4;
+				instr.set(i, new Goto(parameter));
 				break;
 
 				case 8:
