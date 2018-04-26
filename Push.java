@@ -11,6 +11,7 @@ public class Push implements Instruction
     }
 
     public void run(vmStack vms, int programCounter){
+        System.out.println("param: " + parameter);
         vms.push(parameter); //push parameter to the stack
     }
 }

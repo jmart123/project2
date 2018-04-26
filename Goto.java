@@ -2,6 +2,7 @@ public class Goto implements Instruction
 {
 
     private int parameter;
+    private int newCounter;
 
     Goto(int param){
         parameter = param;
@@ -12,6 +13,14 @@ public class Goto implements Instruction
         //need to increment program counter by PC+parameter(PC relative offset)
         
         programCounter += parameter;
+        setNC(programCounter);
+    }
 
+    public void setNC(int pc){
+        this.newCounter = pc;
+    }
+
+    public int getNC(){
+        return this.newCounter;
     }
 }
