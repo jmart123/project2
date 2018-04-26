@@ -45,6 +45,14 @@ public class Parser {
 		return instr;
 	}
 
+	public List<Integer> getRaw() {
+		return raw;
+	}
+
+	public int getSize() {
+		return size - 1;
+	}
+
 	// method to manually add instruction to program list
 	public void add(Instruction i) {
 		instr.add(i);
@@ -69,7 +77,7 @@ public class Parser {
 		for (int i = 0; i < size - 1; i++) {
 			
 			try {
-				raw.add(input.readInt());
+				raw.add(Integer.reverseBytes(input.readInt()));
 			}
 
 			catch (IOException e) {
@@ -123,6 +131,7 @@ public class Parser {
 				break;
 				
 				case 1: // Pop
+				System.out.println("adding Pop, instruction " + i);
 				instr.add(new Pop());
 				break;
 				
@@ -257,6 +266,10 @@ public class Parser {
 				case 15:
 				parameter = (instruction << 4) >> 4;
 				instr.add(new Push(parameter));
+				break;
+
+				default:
+				System.out.println("unknown instruction " + opcode);
 				break;
 			}
 		}
