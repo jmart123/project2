@@ -42,7 +42,7 @@ public class vmStack {
 	}
 	
 	public void dump() {
-		for (int i = 0; i < stack.length; i++) {
+		for (int i = sp; i >= 0; i--) {
 			System.out.println(stack[i]);
 		}
 	}
