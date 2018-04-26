@@ -1,4 +1,4 @@
-public class And implements instruction
+public class And implements Instruction
 {
     public void run(vmStack vms, int programCounter){
         int a;

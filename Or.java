@@ -1,4 +1,4 @@
-public class or implements Instruction
+public class Or implements Instruction
 {
     public void run(vmStack vms, int programCounter){
         int a;

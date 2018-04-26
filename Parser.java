@@ -64,7 +64,7 @@ public class Parser {
 		for (int i = 0; i < size / 4; i++) {
 			
 			try {
-				raw.add(input.readInt());
+				raw.set(i, input.readInt());
 			}
 
 			catch (IOException e) {
@@ -79,6 +79,7 @@ public class Parser {
 		int instruction;
 		int parameter;
 		int opcode;
+		int subcode;
 
 		for (int i = 0; i < size; i++) {
 
@@ -86,37 +87,134 @@ public class Parser {
 			opcode = instruction >> 28;
 
 			switch (opcode) {
+
+				case 0: // Exit, Swap, Inpt, Nop
+				subcode = (instruction >> 24) & 0xf;
+
+				switch (subcode) {
+					
+					case 0: // Exit
+					parameter = instruction & 0xff;
+					instr.set(i, new Exit(parameter));
+					break;
+					
+					case 1: // Swap
+					instr.set(i, new Swap());
+					break;
+					
+					case 2: // Inpt
+					instr.set(i, new Inpt());
+					break;
+					
+					case 3: // Nop
+					instr.set(i, new Nop());
+					break;	
+				}
+
+				break;
 				
+				case 1: // Pop
+				instr.set(i, new Pop());
+				break;
+				
+				case 2: // Add, Sub, Mul, Div, Rem, And, Or, Xor			
+				subcode = (instruction >> 24) & 0xf;
+				
+				switch (subcode) {
+				
+					case 0: // Add
+					instr.set(i, new Add());
+					break;
+				
+					case 1: // Sub
+					instr.set(i, new Sub());
+					break;
+				
+					case 2: // Mul
+					instr.set(i, new Mul());
+					break;
+			
+					case 3: // Div
+					instr.set(i, new Div());
+					break;
+				
+					case 4: // Rem
+					instr.set(i, new Rem());
+					break;
+					
+					case 5: // And
+					instr.set(i, new And());
+					break;
+				
+					case 6: // Or
+					instr.set(i, new Or());
+					break;
+				
+					case 7: // Xor
+					instr.set(i, new Xor());
+					break;
+				}
+
+				break;
+				
+				case 3: // Neg, Not
+				subcode = (instruction >> 24) & 0xf;
+				
+				switch (subcode) {
+					
+					case 0: // Neg
+					instr.set(i, new Neg());
+					break;
+
+					case 1: // Not
+					instr.set(i, new Not());
+					break;
+				}
+				
+				break;
+				
+				case 7: // Goto
+				instr.set(i, new Goto((Instruction << 4) >> 4));
+				break;
+
 				case 8:
-
 				parameter = (instruction << 8) >> 8;
+				subcode = (instruction >> 24) & 0xf;
 
-				switch((instruction >> 24) & 0xf) {
+				switch(subcode) {
 					
 					case 0:
 					instr.set(i, new Ifeq(parameter));
-					
+					break;
+
 					case 1:
 					instr.set(i, new Ifne(parameter));
-					
+					break;
+
 					case 2:
 					instr.set(i, new Iflt(parameter));
-					
+					break;
+
 					case 3:
 					instr.set(i, new Ifgt(parameter));
-					
+					break;
+
 					case 4:
 					instr.set(i, new Ifle(parameter));
-					
+					break;
+
 					case 5:
 					instr.set(i, new Ifge(parameter));
+					break;
 				}
+
+				break;
 				
 				case 9:
-
 				parameter = (instruction << 8) >> 8;
+				subcode = (instruction >> 24) & 0xf;
 
-				switch((instruction >> 24) & 0xf) {
+				switch(subcode) {
 					
 					case 0:
 					instr.set(i, new Ifez(parameter));
@@ -131,23 +229,25 @@ public class Parser {
 					instr.set(i, new Ifpl(parameter));
 				}
 
+				break;
+
 				case 12:
-				
 				parameter = (instruction << 4) >> 4;
 				instr.set(i, new Dup(parameter));
+				break;
 
 				case 13:
-				
 				instr.set(i, new Print());
+				break;
 
 				case 14:
-				
 				instr.set(i, new Dump());
+				break;
 
 				case 15:
-				
 				parameter = (instruction << 4) >> 4;
 				instr.set(i, new Push(parameter));
+				break;
 			}
 		}
 	}
