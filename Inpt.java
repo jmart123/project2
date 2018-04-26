@@ -3,7 +3,7 @@ public class Inpt implements Instruction
 		public void run(vmStack vms, int programCounter){
 				int val;
 
-				val = System.console().readLine();
+				val = Integer.parseInt(System.console().readLine());
 
 				vms.push(val);
 		}

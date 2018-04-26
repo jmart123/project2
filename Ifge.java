@@ -12,11 +12,11 @@ public class Ifge implements Instruction
 
         //peek values from stack
         a = vms.peek(vms.getStackPointer());
-        b = vms.peek(vms.getStackpointer() - 1);
+        b = vms.peek(vms.getStackPointer() - 1);
 
         //check conditional
         if(a >= b){
-            programCounter += (paramter - 1); //program counter is also incremented in the processor
+            programCounter += (parameter - 1); //program counter is also incremented in the processor
         }
     }
 }

@@ -14,7 +14,7 @@ public class Ifnz implements Instruction
 
         //check conditional
         if(a != 0){
-            programCounter += (paramter - 1);
+            programCounter += (parameter - 1);
         }
     }
 }

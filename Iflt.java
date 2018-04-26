@@ -12,7 +12,7 @@ public class Iflt implements Instruction
 
         //peek values from stack. does not pop.
         a = vms.peek(vms.getStackPointer());
-        b = vms.peek(vms.getStackpointer() - 1);
+        b = vms.peek(vms.getStackPointer() - 1);
 
         //check condition, increase program counter if it is met
         if(a < b){

@@ -1,4 +1,4 @@
-public class Ifne implements Instrution
+public class Ifne implements Instruction
 {
     private int parameter; //represents PC relative offset
 

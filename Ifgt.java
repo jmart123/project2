@@ -12,7 +12,7 @@ public class Ifgt implements Instruction
 
         //get values from stack through peek, not pop
         a = vms.peek(vms.getStackPointer());
-        b = vms.peek(vms.getStackpointer() - 1);
+        b = vms.peek(vms.getStackPointer() - 1);
 
         //check conditional for greater than
         if(a > b){
