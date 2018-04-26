@@ -17,10 +17,12 @@ public class Parser {
 	public Parser(String filename) {
 		
 		try {
-			size  = toIntExact((new File(filename)).length() / 4) - 1;
-			instr = new ArrayList<Instruction> ((size / 4) - 1);
-			raw	  = new ArrayList<Integer> ((size / 4) - 1);
+			size  = toIntExact((new File(filename)).length() / 4);
+			instr = new ArrayList<Instruction> ();
+			raw	  = new ArrayList<Integer> ();
 			
+			System.out.println(size);
+
 			try {
 				input = new DataInputStream(new FileInputStream(filename));
 			}
@@ -61,10 +63,10 @@ public class Parser {
 			System.exit(-1);
 		}
 
-		for (int i = 0; i < size / 4; i++) {
+		for (int i = 0; i < size - 1; i++) {
 			
 			try {
-				raw.set(i, input.readInt());
+				raw.add(input.readInt());
 			}
 
 			catch (IOException e) {
@@ -95,26 +97,26 @@ public class Parser {
 					
 					case 0: // Exit
 					parameter = instruction & 0xff;
-					instr.set(i, new Exit(parameter));
+					instr.add(new Exit(parameter));
 					break;
 					
 					case 1: // Swap
-					instr.set(i, new Swap());
+					instr.add(new Swap());
 					break;
 					
 					case 2: // Inpt
-					instr.set(i, new Inpt());
+					instr.add(new Inpt());
 					break;
 					
 					case 3: // Nop
-					instr.set(i, new Nop());
+					instr.add(new Nop());
 					break;	
 				}
 
 				break;
 				
 				case 1: // Pop
-				instr.set(i, new Pop());
+				instr.add(new Pop());
 				break;
 				
 				case 2: // Add, Sub, Mul, Div, Rem, And, Or, Xor			
@@ -123,35 +125,35 @@ public class Parser {
 				switch (subcode) {
 				
 					case 0: // Add
-					instr.set(i, new Add());
+					instr.add(new Add());
 					break;
 				
 					case 1: // Sub
-					instr.set(i, new Sub());
+					instr.add(new Sub());
 					break;
 				
 					case 2: // Mul
-					instr.set(i, new Mul());
+					instr.add(new Mul());
 					break;
 			
 					case 3: // Div
-					instr.set(i, new Div());
+					instr.add(new Div());
 					break;
 				
 					case 4: // Rem
-					instr.set(i, new Rem());
+					instr.add(new Rem());
 					break;
 					
 					case 5: // And
-					instr.set(i, new And());
+					instr.add(new And());
 					break;
 				
 					case 6: // Or
-					instr.set(i, new Or());
+					instr.add(new Or());
 					break;
 				
 					case 7: // Xor
-					instr.set(i, new Xor());
+					instr.add(new Xor());
 					break;
 				}
 
@@ -163,11 +165,11 @@ public class Parser {
 				switch (subcode) {
 					
 					case 0: // Neg
-					instr.set(i, new Neg());
+					instr.add(new Neg());
 					break;
 
 					case 1: // Not
-					instr.set(i, new Not());
+					instr.add(new Not());
 					break;
 				}
 				
@@ -175,7 +177,7 @@ public class Parser {
 				
 				case 7: // Goto
 				parameter = (instruction << 4) >> 4;
-				instr.set(i, new Goto(parameter));
+				instr.add(new Goto(parameter));
 				break;
 
 				case 8:
@@ -185,27 +187,27 @@ public class Parser {
 				switch(subcode) {
 					
 					case 0:
-					instr.set(i, new Ifeq(parameter));
+					instr.add(new Ifeq(parameter));
 					break;
 
 					case 1:
-					instr.set(i, new Ifne(parameter));
+					instr.add(new Ifne(parameter));
 					break;
 
 					case 2:
-					instr.set(i, new Iflt(parameter));
+					instr.add(new Iflt(parameter));
 					break;
 
 					case 3:
-					instr.set(i, new Ifgt(parameter));
+					instr.add(new Ifgt(parameter));
 					break;
 
 					case 4:
-					instr.set(i, new Ifle(parameter));
+					instr.add(new Ifle(parameter));
 					break;
 
 					case 5:
-					instr.set(i, new Ifge(parameter));
+					instr.add(new Ifge(parameter));
 					break;
 				}
 
@@ -218,36 +220,36 @@ public class Parser {
 				switch(subcode) {
 					
 					case 0:
-					instr.set(i, new Ifez(parameter));
+					instr.add(new Ifez(parameter));
 
 					case 1:
-					instr.set(i, new Ifnz(parameter));
+					instr.add(new Ifnz(parameter));
 
 					case 2:
-					instr.set(i, new Ifmi(parameter));
+					instr.add(new Ifmi(parameter));
 
 					case 3:
-					instr.set(i, new Ifpl(parameter));
+					instr.add(new Ifpl(parameter));
 				}
 
 				break;
 
 				case 12:
 				parameter = (instruction << 4) >> 4;
-				instr.set(i, new Dup(parameter));
+				instr.add(new Dup(parameter));
 				break;
 
 				case 13:
-				instr.set(i, new Print());
+				instr.add(new Print());
 				break;
 
 				case 14:
-				instr.set(i, new Dump());
+				instr.add(new Dump());
 				break;
 
 				case 15:
 				parameter = (instruction << 4) >> 4;
-				instr.set(i, new Push(parameter));
+				instr.add(new Push(parameter));
 				break;
 			}
 		}
