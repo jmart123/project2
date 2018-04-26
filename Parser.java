@@ -41,6 +41,10 @@ public class Parser {
 		}
 	}
 
+	public List<Instruction> getInstructions() {
+		return instr;
+	}
+
 	// method to manually add instruction to program list
 	public void add(Instruction i) {
 		instr.add(i);
@@ -52,7 +56,7 @@ public class Parser {
 
 		try {
 			if (input.readInt() != 0xfeedbeef) {
-				System.out.println("magic header missing...FEEDBEEF");
+				System.out.println("magic header missing...0xFEEDBEEF");
 				System.exit(-1);
 			}
 		}
