@@ -109,18 +109,18 @@ public class Parser {
 					case 0: // Exit
 					parameter = instruction & 0xff;
 					instr.add(new Exit(parameter));
-					System.out.print("Exit");
-					System.out.println(parameter);
+//					System.out.print("Exit");
+//					System.out.println(parameter);
 					break;
 					
 					case 1: // Swap
 					instr.add(new Swap());
-					System.out.println("Swap");
+//					System.out.println("Swap");
 					break;
 					
 					case 2: // Inpt
 					instr.add(new Inpt());
-					System.out.println("Inpt");
+//					System.out.println("Inpt");
 					break;
 					
 					case 3: // Nop
@@ -131,7 +131,7 @@ public class Parser {
 				break;
 				
 				case 1: // Pop
-				System.out.println("adding Pop, instruction " + i);
+//				System.out.println("adding Pop, instruction " + i);
 				instr.add(new Pop());
 				break;
 				
@@ -237,15 +237,19 @@ public class Parser {
 					
 					case 0:
 					instr.add(new Ifez(parameter));
+					break;
 
 					case 1:
 					instr.add(new Ifnz(parameter));
+					break;
 
 					case 2:
 					instr.add(new Ifmi(parameter));
+					break;
 
 					case 3:
 					instr.add(new Ifpl(parameter));
+					break;
 				}
 
 				break;
