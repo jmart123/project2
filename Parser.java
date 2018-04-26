@@ -97,12 +97,12 @@ public class Parser {
 		for (int i = 0; i < size - 1; i++) {
 
 			instruction = raw.get(i);
-			opcode = instruction >> 28;
+			opcode = instruction >>> 28;
 
 			switch (opcode) {
 
 				case 0: // Exit, Swap, Inpt, Nop
-				subcode = (instruction >> 24) & 0xf;
+				subcode = (instruction >>> 24) & 0xf;
 
 				switch (subcode) {
 					
@@ -136,7 +136,7 @@ public class Parser {
 				break;
 				
 				case 2: // Add, Sub, Mul, Div, Rem, And, Or, Xor			
-				subcode = (instruction >> 24) & 0xf;
+				subcode = (instruction >>> 24) & 0xf;
 				
 				switch (subcode) {
 				
@@ -176,7 +176,7 @@ public class Parser {
 				break;
 				
 				case 3: // Neg, Not
-				subcode = (instruction >> 24) & 0xf;
+				subcode = (instruction >>> 24) & 0xf;
 				
 				switch (subcode) {
 					
@@ -192,13 +192,13 @@ public class Parser {
 				break;
 				
 				case 7: // Goto
-				parameter = (instruction << 4) >> 4;
+				parameter = (instruction << 4) >>> 4;
 				instr.add(new Goto(parameter));
 				break;
 
 				case 8:
-				parameter = (instruction << 8) >> 8;
-				subcode = (instruction >> 24) & 0xf;
+				parameter = (instruction << 8) >>> 8;
+				subcode = (instruction >>> 24) & 0xf;
 
 				switch(subcode) {
 					
@@ -230,8 +230,8 @@ public class Parser {
 				break;
 				
 				case 9:
-				parameter = (instruction << 8) >> 8;
-				subcode = (instruction >> 24) & 0xf;
+				parameter = (instruction << 8) >>> 8;
+				subcode = (instruction >>> 24) & 0xf;
 
 				switch(subcode) {
 					
@@ -251,7 +251,7 @@ public class Parser {
 				break;
 
 				case 12:
-				parameter = (instruction << 4) >> 4;
+				parameter = (instruction << 4) >>> 4;
 				instr.add(new Dup(parameter));
 				break;
 
@@ -264,7 +264,7 @@ public class Parser {
 				break;
 
 				case 15:
-				parameter = (instruction << 4) >> 4;
+				parameter = (instruction << 4) >>> 4;
 				instr.add(new Push(parameter));
 				break;
 
