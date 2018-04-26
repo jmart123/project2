@@ -8,6 +8,7 @@ public class Parser {
 	private List<Integer>	  raw;	 // raw integer bytecode
 	private DataInputStream	  input; // binary input stream
 	private int				  size;  // equals filesize/4 (NUM_INSTRUCTIONS)
+	
 
 	public Parser() {
 		instr = new ArrayList<Instruction> ();
@@ -21,8 +22,6 @@ public class Parser {
 			instr = new ArrayList<Instruction> ();
 			raw	  = new ArrayList<Integer> ();
 			
-			System.out.println(size);
-
 			try {
 				input = new DataInputStream(new FileInputStream(filename));
 			}
@@ -83,7 +82,7 @@ public class Parser {
 		int opcode;
 		int subcode;
 
-		for (int i = 0; i < size; i++) {
+		for (int i = 0; i < size - 1; i++) {
 
 			instruction = raw.get(i);
 			opcode = instruction >> 28;
@@ -98,14 +97,18 @@ public class Parser {
 					case 0: // Exit
 					parameter = instruction & 0xff;
 					instr.add(new Exit(parameter));
+					System.out.print("Exit");
+					System.out.println(parameter);
 					break;
 					
 					case 1: // Swap
 					instr.add(new Swap());
+					System.out.println("Swap");
 					break;
 					
 					case 2: // Inpt
 					instr.add(new Inpt());
+					System.out.println("Inpt");
 					break;
 					
 					case 3: // Nop
