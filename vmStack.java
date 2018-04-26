@@ -40,6 +40,12 @@ public class vmStack {
 
 		return 420; // blaze it
 	}
+	
+	public void dump() {
+		for (int i = 0; i < size; i++) {
+			System.out.println(stack[i]);
+		}
+	}
 
 	public int getStackPointer() {
 		return sp;
