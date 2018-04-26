@@ -1,6 +1,7 @@
 public class Ifgt implements Instruction
 {
     private int parameter; //represents the offset
+    private int newCounter; //new programCounter after conditional
 
     Ifgt(int param){
         parameter = param;
@@ -16,7 +17,18 @@ public class Ifgt implements Instruction
 
         //check conditional for greater than
         if(a > b){
-            programCounter += (parameter - 1); //the program counter is also incremented in the processor
+            programCounter += (parameter/4); //the program counter is also incremented in the processor
+            setNC(programCounter);
         }
+    }
+
+    //set new program counter
+    public void setNC(int pc){
+        newCounter = pc;
+    }
+
+    //return updated program counter
+    public int getNC(){
+        return newCounter;
     }
 }

@@ -1,6 +1,7 @@
 public class Iflt implements Instruction
 {
     private int parameter; //represents PC relative offset
+    private int newCounter; //updated program counter after conditional
 
     Iflt(int param){
         parameter = param;
@@ -16,8 +17,19 @@ public class Iflt implements Instruction
 
         //check condition, increase program counter if it is met
         if(a < b){
-            programCounter += (parameter - 1);
+            programCounter += (parameter/4);
+            setNC(programCounter);
         }
+    }
+
+    //set new program counter
+    public void setNC(int pc){
+        newCounter = pc;
+    }
+
+    //get new counter
+    public int getNC(){
+        return newCounter;
     }
 
 }

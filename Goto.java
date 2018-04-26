@@ -17,11 +17,11 @@ public class Goto implements Instruction
 
 	// Goto setter
 	public void setNC(int pc){
-		this.newCounter = pc;
+		newCounter = pc;
 	}
 	
 	// Goto getter
 	public int getNC(){
-		return this.newCounter;
+		return newCounter;
 	}
 }

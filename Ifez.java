@@ -1,6 +1,7 @@
 public class Ifez implements Instruction
 {
     private int parameter; //represents PC relative offset
+    private int newCounter; //updated program counter
 
     Ifez(int param){
         parameter = param;
@@ -14,7 +15,16 @@ public class Ifez implements Instruction
 
         //check conditional
         if(a == 0){
-            programCounter += (parameter - 1);
+            programCounter += (parameter/4);
+            setNC(programCounter);
         }
     }
+
+    public void setNC(int pc){
+        newCounter = pc;
+    }
+
+    public int getNC(){
+        return newCounter;
+    }   
 }
