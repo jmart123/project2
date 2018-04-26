@@ -1,26 +1,27 @@
 public class Goto implements Instruction
 {
 
-    private int parameter;
-    private int newCounter;
+	private int parameter;
+	private int newCounter; //For new PC after the Goto
 
-    Goto(int param){
-        parameter = param;
-    }
+	Goto(int param){
+		parameter = param;
+	}
 
-    public void run(vmStack vms, int programCounter){
-        //vms.programCounter += parameter;
-        //need to increment program counter by PC+parameter(PC relative offset)
-        
-        programCounter += (parameter/4);
-        setNC(programCounter);
-    }
+	public void run(vmStack vms, int programCounter){
+		// Increment program counter by PC+parameter(PC relative offset)
 
-    public void setNC(int pc){
-        this.newCounter = pc;
-    }
+		programCounter += (parameter/4);
+		setNC(programCounter);
+	}
 
-    public int getNC(){
-        return this.newCounter;
-    }
+	// Goto setter
+	public void setNC(int pc){
+		this.newCounter = pc;
+	}
+	
+	// Goto getter
+	public int getNC(){
+		return this.newCounter;
+	}
 }
