@@ -1,22 +1,18 @@
 // Driver file
-
+import java.util.*;
 class Processor {
-  private List<Integer> instList;
-  private vmStack vms;
 
-	public static void main(String[] args) {
-		Parser p = new Parser(args[0]);
-		
-		for () {
-			System.out.println(i);
-		}
+	  public static void main(String[] args) {
+        List<Instruction> instList;
+        vmStack vms;
 
-    instList = p.getInstructions();
-    vms = new vmStack(); 
+		    Parser p = new Parser(args[0]);
+        instList = p.getInstructions();
+        vms = new vmStack(); 
 
+		    for(int i = 0; i < instList.size(); i++){
+		        instList.get(i).run(vms, i);    
+        }
+	  }
 
-		for(int i = 0; i < instList.size(); i++){
-		  instList.get(i).run(vms, i);    
-    }
-	}
 }
