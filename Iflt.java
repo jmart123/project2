@@ -16,7 +16,7 @@ public class Iflt implements Instruction
 
         //check condition, increase program counter if it is met
         if (a < b){
-            return programCounter + (parameter / 4) - 1;
+            return programCounter - (parameter / 4) + 1;
         } else {
 			return programCounter;
 		}

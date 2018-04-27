@@ -14,7 +14,7 @@ public class Ifmi implements Instruction
 
         //check conditional
         if (a < 0){
-            return programCounter + (parameter / 4) - 1;
+            return programCounter - (parameter / 4) + 1;
         } else {
 			return programCounter;
 		}

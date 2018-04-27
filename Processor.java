@@ -1,3 +1,12 @@
+/*
+	CS365 Group Project 2 - Stack Virtual Machine
+
+	Gurudev Ball-Khalsa
+	Jeffery Martin
+	Alexander Nehls
+	Tristan Spakes
+*/
+
 import java.util.*;
 
 class Processor {
@@ -9,16 +18,15 @@ class Processor {
 			System.exit(-1);
 		}
 
-		// Create a new parser
-		Parser p = new Parser(args[0]);
-		// Load instruction list from parser
-		List<Instruction> instr = p.getInstructions();
 		// Create a new stack
 		vmStack vms = new vmStack();
-
+		
+		// Create a new parser
+		Parser p = new Parser(args[0], vms);
+		
         // Instruction loop. Program counter is returned from each instruction.
-		for (int pc = 0; pc < instr.size(); pc++) {
-			pc = instr.get(pc).run(vms, pc);
+		for (; vms.pc > vms.ic; vms.pc--) {
+			vms.pc = p.parse(vms.peek(vms.pc)).run(vms, vms.pc);
 		}
 	}
 }

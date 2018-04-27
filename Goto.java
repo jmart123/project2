@@ -11,7 +11,7 @@ public class Goto implements Instruction
 	public int run(vmStack vms, int programCounter){
 
 		// Increment program counter by PC+parameter(PC relative offset)
-		return programCounter + (parameter / 4) - 1;
+		return programCounter - (parameter / 4) + 1;
 		
 	}
 

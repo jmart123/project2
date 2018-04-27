@@ -16,7 +16,7 @@ public class Ifeq implements Instruction
 
         //check conditional
         if (a == b) {
-            return programCounter + (parameter / 4) - 1; //add the PC + PC relative offset
+            return programCounter - (parameter / 4) + 1; //add the PC + PC relative offset
         } else {
 			return programCounter;
 		}

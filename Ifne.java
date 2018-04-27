@@ -17,7 +17,7 @@ public class Ifne implements Instruction
 
         //check conditional
         if (a != b){
-            return programCounter + (parameter / 4) - 1;
+            return programCounter - (parameter / 4) + 1;
         } else {
 			return programCounter;
 		}

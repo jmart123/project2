@@ -16,7 +16,7 @@ public class Ifgt implements Instruction
 
         //check conditional for greater than
         if (a > b){
-            return programCounter + (parameter / 4) - 1; 
+            return programCounter - (parameter / 4) + 1;
         } else {
 			return programCounter;
 		}
